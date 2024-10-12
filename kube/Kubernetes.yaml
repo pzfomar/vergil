@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: collector-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: collector
+  template:
+    metadata:
+      labels:
+        app: collector
+    spec:
+      containers:
+      - name: mongodb-container
+        image: mongodb/mongodb-community-server:latest
+        restart: always
+        environment:
+          MONGO_INITDB_ROOT_USERNAME: user
+          MONGO_INITDB_ROOT_PASSWORD: pass
+        ports:
+        - containerPort: 27017
