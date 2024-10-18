@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRep
 import com.mongodb.reactivestreams.client.MongoClient;
 
 @Configuration
-@EnableReactiveMongoRepositories
+@EnableReactiveMongoRepositories(basePackages = "com.pzfomar.vergil.*")
 @EnableReactiveMongoAuditing
 public class ReactiveMongoConfig {
     @Value("${spring.data.mongodb.database:vergil}")
@@ -21,7 +21,7 @@ public class ReactiveMongoConfig {
     private MongoClient mongoClient;
 
     @Bean
-    public ReactiveMongoTemplate reactiveMongoTemplate() {
+    ReactiveMongoTemplate reactiveMongoTemplate() {
         return new ReactiveMongoTemplate(mongoClient, springDataMongodbDatabase);
     }
 }

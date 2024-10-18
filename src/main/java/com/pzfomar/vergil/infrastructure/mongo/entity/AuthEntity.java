@@ -1,7 +1,7 @@
-package com.pzfomar.vergil.infrastructure.config.security;
+package com.pzfomar.vergil.infrastructure.mongo.entity;
 
-import java.util.List;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
@@ -10,15 +10,20 @@ import org.springframework.data.annotation.Version;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.pzfomar.vergil.domain.enums.RolEnum;
+import com.pzfomar.vergil.domain.enums.StatusEnum;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Setter
+@Getter
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Document(collection = "auth")
 public class AuthEntity implements Persistable<String> {
     @Version
@@ -27,21 +32,30 @@ public class AuthEntity implements Persistable<String> {
     @Id
     private String id;
 
-    private String username;
-
+    private String email;
+    
     private String password;
+    
+    @Builder.Default
+    private List<AdvertisingEntity> advertisings = List.of();
 
-    @Builder.Default()
-    private boolean active = true;
+    @Builder.Default
+    private List<TermConditionEntity> termsConditions = List.of();
 
-    @Builder.Default()
-    private List<String> roles = List.of("USER");
+    @Builder.Default
+    private StatusEnum status = StatusEnum.VALIDATE;
+
+    @Builder.Default
+    private RolEnum rol = RolEnum.USER;
 
     @CreatedDate
-    protected LocalDateTime creationDate;
+    private LocalDateTime creationDate;
     
     @LastModifiedDate
-    protected LocalDateTime lastModifiedDate;
+    private LocalDateTime lastModifiedDate;
+    
+    @Builder.Default
+    private LocalDateTime deleteDate = null;
     
     @Override
     public boolean isNew() {
