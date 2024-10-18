@@ -1,4 +1,4 @@
-package com.pzfomar.vergil.infrastructure.config.security;
+package com.pzfomar.vergil.infrastructure.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -11,7 +11,6 @@ import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
-@SuppressWarnings("null")
 @RequiredArgsConstructor
 public class JwtTokenAuthenticationFilter implements WebFilter {
     public static final String HEADER_PREFIX = "Bearer ";

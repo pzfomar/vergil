@@ -1,4 +1,6 @@
-package com.pzfomar.vergil.infrastructure.config.security;
+package com.pzfomar.vergil.infrastructure.config;
+
+import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,12 +19,14 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.authorization.AuthorizationContext;
 import org.springframework.security.web.server.context.NoOpServerSecurityContextRepository;
 
+import com.pzfomar.vergil.domain.repository.AuthRepository;
+
 import reactor.core.publisher.Mono;
 
 @Configuration
 public class SecurityConfig {
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -67,20 +71,20 @@ public class SecurityConfig {
     }
 
     @Bean
-    public ReactiveUserDetailsService userDetailsService(AuthRepository users) {
-        return username -> users.findByUsername(username)
-                .map(u -> User.withUsername(u.getUsername())
+    ReactiveUserDetailsService userDetailsService(AuthRepository authRepository) {
+        return email -> authRepository.findByEmail(email)
+                .map(u -> User.withUsername(u.getEmail())
                         .password(u.getPassword())
-                        .authorities(u.getRoles().toArray(new String[0]))
-                        .accountExpired(!u.isActive())
-                        .credentialsExpired(!u.isActive())
-                        .disabled(!u.isActive())
-                        .accountLocked(!u.isActive())
+                        .authorities(List.of(u.getRol().name()).toArray(new String[0]))
+                        .accountExpired(u.getStatus().name() != "ACTIVE")
+                        .credentialsExpired(u.getStatus().name() != "ACTIVE")
+                        .disabled(u.getStatus().name() != "ACTIVE")
+                        .accountLocked(u.getStatus().name() != "ACTIVE")
                         .build());
     }
 
     @Bean
-    public ReactiveAuthenticationManager reactiveAuthenticationManager(ReactiveUserDetailsService userDetailsService,
+    ReactiveAuthenticationManager reactiveAuthenticationManager(ReactiveUserDetailsService userDetailsService,
             PasswordEncoder passwordEncoder) {
         var authenticationManager = new UserDetailsRepositoryReactiveAuthenticationManager(userDetailsService);
         authenticationManager.setPasswordEncoder(passwordEncoder);
