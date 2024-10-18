@@ -1,4 +1,4 @@
-package com.pzfomar.vergil.infrastructure.config.security;
+package com.pzfomar.vergil.infrastructure.config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
@@ -36,8 +36,6 @@ public class JwtTokenProvider {
     private long jwtValidityInMs;
 
     private static final String AUTHORITIES_KEY = "roles";
-
-    //private final JwtProperties jwtProperties;
 
     private SecretKey secretKey;
 
