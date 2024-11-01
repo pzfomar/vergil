@@ -1,13 +1,11 @@
-import { defineConfig } from 'vite'
-import solid from 'vite-plugin-solid'
 import obfuscatorPlugin from "vite-plugin-javascript-obfuscator";
+import { defineConfig } from "vite";
 
 export default defineConfig({
   plugins: [
-    solid(),
     obfuscatorPlugin({
-      include: ["src/main/ts/**"],
-      exclude: [/node_modules/],
+      include: ["src/main/javascript/**"],
+      exclude: ["/node_modules/"],
       apply: "build",
       debugger: true,
       options: {
@@ -15,28 +13,25 @@ export default defineConfig({
       },
     }),
   ],
-  server: {
-    //open: 'templates/index.html',
-  },
+  root: "./src/main/javascript",
+  publicDir: "./public",
   build: {
-    outDir: 'src/main/resources/static/',
+    outDir: "../resources/static",
     emptyOutDir: true,
     rollupOptions: {
-      //input: 'templates/index.html',
       output: {
-        //dir: "src/main/resources/",
-        //file: "c/index.html",
         assetFileNames: (assetInfo) => {
-          let other = 'other';
-          let extType = (assetInfo.name || `${other}.${other}`).split('.').at(1) || other;
+          let other = "other";
+          let extType =
+            (assetInfo.name || `${other}.${other}`).split(".").at(1) || other;
           if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
-            extType = 'img';
+            extType = "img";
           } else if (/css|sass|scss/i.test(extType)) {
-            extType = 'css';
+            extType = "css";
           } else if (/woff|woff2|eot|ttf|otf/i.test(extType)) {
-            extType = 'fonts';
+            extType = "fonts";
           } else if (/json/.test(extType)) {
-            extType = 'anim';
+            extType = "anim";
           }
           return `${extType}/[name][extname]`;
         },

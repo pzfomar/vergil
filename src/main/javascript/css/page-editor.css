@@ -1,0 +1,25 @@
+#editor-js {
+  background-color: white;
+  width: 100%;
+}
+
+#view-code {
+  background-color: white;
+  width: 90%;
+}
+
+ion-segment-button {
+  --indicator-color: #0163aa;
+}
+
+ion-segment-button.md {
+  --color: #000;
+  --color-checked: #0163aa;
+  --indicator-height: 4px;
+}
+
+ion-segment-button.ios {
+  --color: #0163aa;
+  --color-checked: #fff;
+  --border-radius: 20px;
+}
