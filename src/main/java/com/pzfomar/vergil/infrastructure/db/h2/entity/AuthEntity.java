@@ -1,4 +1,4 @@
-package com.pzfomar.vergil.infrastructure.mongo.entity;
+package com.pzfomar.vergil.infrastructure.db.h2.entity;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -8,7 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.annotation.Version;
 import org.springframework.data.domain.Persistable;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.relational.core.mapping.Table;
 
 import com.pzfomar.vergil.domain.enums.RolEnum;
 import com.pzfomar.vergil.domain.enums.StatusEnum;
@@ -24,7 +24,7 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "auth")
+@Table(name = "auth")
 public class AuthEntity implements Persistable<String> {
     @Version
     private Long version;

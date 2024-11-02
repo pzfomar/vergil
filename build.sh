@@ -1,6 +1,5 @@
 #chmod +x ./build.sh
 #./build.sh
-
 clear
 
 echo "---------------------------------[ Building environment           ]---------------------------------"
@@ -12,16 +11,15 @@ echo "---------------------------------[ Validate environment           ]-------
 if ! [ -d $PROYECT_PATH ]
 then
   echo "$PROYECT_PATH not be found"
-fi
-if ! command -v NPM 2>&1 >/dev/null
+  exit 1
+elif ! command -v $NPM 2>&1 >/dev/null
 then
-    echo "npm not be found"
-    exit 1
-fi
-if ! command -v MVN 2>&1 >/dev/null
+  echo "$NPM not be found"
+  exit 1
+elif ! command -v $MVN 2>&1 >/dev/null
 then
-    echo "mvn not be found"
-    exit 1
+  echo "mvn not be found"
+  exit 1
 fi
 
 echo "---------------------------------[ Building the nodejs project    ]---------------------------------"

@@ -1,11 +1,15 @@
-package com.pzfomar.vergil.infrastructure.mongo.mapper;
+package com.pzfomar.vergil.infrastructure.db.h2.mapper;
 
 import java.util.stream.Collectors;
 
 import com.pzfomar.vergil.domain.model.AuthModel;
-import com.pzfomar.vergil.infrastructure.mongo.entity.AuthEntity;
+import com.pzfomar.vergil.infrastructure.db.h2.entity.AuthEntity;
 
 public class AuthMapper {
+	private AuthMapper() {
+		throw new IllegalStateException("AuthMapper class");
+	}
+
 	public static AuthModel toModel(AuthEntity data) {
 		return AuthModel.builder()
 				.version(data.getVersion())

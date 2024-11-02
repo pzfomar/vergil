@@ -10,6 +10,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 public class SignInDto {
+	private SignInDto() {
+		throw new IllegalStateException("SignInDto class");
+	}
+
 	@Setter
 	@Getter
 	@NoArgsConstructor

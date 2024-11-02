@@ -1,4 +1,4 @@
-package com.pzfomar.vergil.infrastructure.mongo.entity;
+package com.pzfomar.vergil.infrastructure.db.mongodb.entity;
 
 import java.time.LocalDateTime;
 
@@ -20,8 +20,8 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "termsConditions")
-public class TermConditionEntity implements Persistable<String> {
+@Document(collection = "advertisings")
+public class AdvertisingEntity implements Persistable<String> {
 	@Version
 	private Long version;
 

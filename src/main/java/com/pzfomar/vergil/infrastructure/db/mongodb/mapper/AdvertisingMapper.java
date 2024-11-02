@@ -1,9 +1,13 @@
-package com.pzfomar.vergil.infrastructure.mongo.mapper;
+package com.pzfomar.vergil.infrastructure.db.mongodb.mapper;
 
 import com.pzfomar.vergil.domain.model.AdvertisingModel;
-import com.pzfomar.vergil.infrastructure.mongo.entity.AdvertisingEntity;
+import com.pzfomar.vergil.infrastructure.db.mongodb.entity.AdvertisingEntity;
 
 public class AdvertisingMapper {
+	private AdvertisingMapper() {
+		throw new IllegalStateException("AdvertisingMapper class");
+	}
+
 	public static AdvertisingModel toModel(AdvertisingEntity data) {
 		return AdvertisingModel.builder()
 				.version(data.getVersion())

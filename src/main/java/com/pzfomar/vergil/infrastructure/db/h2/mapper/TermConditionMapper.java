@@ -1,9 +1,13 @@
-package com.pzfomar.vergil.infrastructure.mongo.mapper;
+package com.pzfomar.vergil.infrastructure.db.h2.mapper;
 
 import com.pzfomar.vergil.domain.model.TermConditionModel;
-import com.pzfomar.vergil.infrastructure.mongo.entity.TermConditionEntity;
+import com.pzfomar.vergil.infrastructure.db.h2.entity.TermConditionEntity;
 
 public class TermConditionMapper {
+	private TermConditionMapper() {
+		throw new IllegalStateException("TermConditionMapper class");
+	}
+
 	public static TermConditionModel toModel(TermConditionEntity data) {
 		return TermConditionModel.builder()
 				.version(data.getVersion())

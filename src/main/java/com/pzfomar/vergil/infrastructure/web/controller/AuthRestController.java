@@ -1,8 +1,8 @@
 package com.pzfomar.vergil.infrastructure.web.controller;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,12 +26,11 @@ import jakarta.validation.Valid;
 @RequestMapping("/auth")
 @Validated
 @Slf4j
+@AllArgsConstructor
 public class AuthRestController {
-	@Autowired
-	private SignUpService signUpService;
+	private final SignUpService signUpService;
 
-	@Autowired
-	private SignInService signInService;
+	private final SignInService signInService;
 
 	@PostMapping("/sign-up")
 	public Mono<ResponseEntity<Void>> signUp(@Valid @RequestBody Mono<SignUpDto.Request> request) {

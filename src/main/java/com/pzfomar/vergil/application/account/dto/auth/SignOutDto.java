@@ -5,6 +5,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class SignOutDto {
+	private SignOutDto() {
+		throw new IllegalStateException("SignOutDto class");
+	}
+
 	@Setter
 	@Getter
 	@Builder

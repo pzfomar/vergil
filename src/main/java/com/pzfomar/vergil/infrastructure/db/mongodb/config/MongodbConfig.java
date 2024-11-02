@@ -1,6 +1,5 @@
-package com.pzfomar.vergil.infrastructure.config;
+package com.pzfomar.vergil.infrastructure.db.mongodb.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,18 +9,20 @@ import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRep
 
 import com.mongodb.reactivestreams.client.MongoClient;
 
+import lombok.RequiredArgsConstructor;
+
 @Configuration
-@EnableReactiveMongoRepositories(basePackages = "com.pzfomar.vergil.*")
+@EnableReactiveMongoRepositories(basePackages = "com.pzfomar.vergil.infrastructure.db.mongodb.*")
 @EnableReactiveMongoAuditing
-public class ReactiveMongoConfig {
+@RequiredArgsConstructor
+public class MongodbConfig {
+    private final MongoClient mongoClient;
+
     @Value("${spring.data.mongodb.database:vergil}")
     private String springDataMongodbDatabase;
 
-    @Autowired
-    private MongoClient mongoClient;
-
     @Bean
     ReactiveMongoTemplate reactiveMongoTemplate() {
-        return new ReactiveMongoTemplate(mongoClient, springDataMongodbDatabase);
+        return new ReactiveMongoTemplate(this.mongoClient, springDataMongodbDatabase);
     }
 }

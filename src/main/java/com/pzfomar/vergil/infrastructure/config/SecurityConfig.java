@@ -19,6 +19,7 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.authorization.AuthorizationContext;
 import org.springframework.security.web.server.context.NoOpServerSecurityContextRepository;
 
+import com.pzfomar.vergil.domain.enums.StatusEnum;
 import com.pzfomar.vergil.domain.repository.AuthRepository;
 
 import reactor.core.publisher.Mono;
@@ -72,14 +73,14 @@ public class SecurityConfig {
 
     @Bean
     ReactiveUserDetailsService userDetailsService(AuthRepository authRepository) {
-        return email -> authRepository.findByEmail(email)
+        return email -> authRepository.modelFindByEmail(email)
                 .map(u -> User.withUsername(u.getEmail())
                         .password(u.getPassword())
                         .authorities(List.of(u.getRol().name()).toArray(new String[0]))
-                        .accountExpired(u.getStatus().name() != "ACTIVE")
-                        .credentialsExpired(u.getStatus().name() != "ACTIVE")
-                        .disabled(u.getStatus().name() != "ACTIVE")
-                        .accountLocked(u.getStatus().name() != "ACTIVE")
+                        .accountExpired(u.getStatus() != StatusEnum.ACTIVE)
+                        .credentialsExpired(u.getStatus() != StatusEnum.ACTIVE)
+                        .disabled(u.getStatus() != StatusEnum.ACTIVE)
+                        .accountLocked(u.getStatus() != StatusEnum.ACTIVE)
                         .build());
     }
 
