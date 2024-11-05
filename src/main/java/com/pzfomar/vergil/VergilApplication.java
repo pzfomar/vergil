@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.pzfomar.vergil.application.account.dto.auth.SignUpDto;
-import com.pzfomar.vergil.application.account.service.auth.SignUpService;
+import com.pzfomar.vergil.service.signup.SignUpRequestDto;
+import com.pzfomar.vergil.service.signup.SignUpService;
 
 import lombok.AllArgsConstructor;
 import reactor.core.publisher.Mono;
@@ -23,8 +23,8 @@ public class VergilApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Mono<SignUpDto.Request> request = Mono.just(SignUpDto.Request.builder()
-				.email("demo")
+		Mono<SignUpRequestDto> request = Mono.just(SignUpRequestDto.builder()
+				.email("demo@vergil.com")
 				.password("demo")
 				.confirmPassword("demo")
 				.build());

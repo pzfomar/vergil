@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" mode="ios">
+  <head>
+    <meta charset="UTF-8" />
+    <link id="favicon" rel="icon" type="image/svg+xml" href="./img/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vergil</title>
+    <!-- ionic -->
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"
+    />
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/ionicons/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://cdn.jsdelivr.net/npm/ionicons/dist/ionicons/ionicons.js"
+    ></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module">
+      import { RoutesConfig } from "./infrastructure/web/config/routes-config.ts";
+      document.querySelector("#app").innerHTML = `
+      <ion-router useHash="true" class="ios">
+        ${RoutesConfig.map(
+          ({ url, component }) =>
+            `<ion-route url="${url}" component="${component}"></ion-route>`
+        )}
+      </ion-router>
+      <ion-router-outlet></ion-router-outlet>
+      `;
+    </script>
+  </body>
+</html>

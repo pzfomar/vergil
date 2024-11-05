@@ -1,6 +1,5 @@
 target/
 data/
-.idea/
 result-functional-tests.xml
 .scannerwork
 .env
@@ -23,6 +22,7 @@ dist
 dist-ssr
 *.local
 .vscode
+.vscode/*
 !.vscode/extensions.json
 .idea
 .DS_Store
